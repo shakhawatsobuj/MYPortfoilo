@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5">
+  <title>Shakhawat Hossain | Civil Site Engineer</title>
+  <meta name="description" content="Professional portfolio of Shakhawat Hossain, a Civil Site Engineer from Bangladesh with experience in construction, water supply infrastructure, BOQ, quality assurance and site supervision.">
+  <link rel="canonical" href="https://shakhawat-portfolio.example.com/">
+  <!-- Font Awesome Free -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="stylecss.css">
+  <!-- Open Graph -->
+  <meta property="og:title" content="Shakhawat Hossain | Civil Site Engineer">
+  <meta property="og:description" content="Professional portfolio of Shakhawat Hossain, Civil Site Engineer from Bangladesh.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://shakhawat-portfolio.example.com/">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏗️</text></svg>">
+  <meta name="robots" content="index, follow">
+  <style>
+    /* ===== PROJECTS PAGE SPECIFIC STYLES ===== */
+    #projectsPage {
+      display: none;
+      animation: fadeIn 0.4s ease;
+    }
+    #projectsPage.active {
+      display: block;
+    }
+    #mainPage.hidden {
+      display: none;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .projects-hero {
+      padding-top: 7rem;
+      padding-bottom: 2rem;
+      text-align: center;
+      background: linear-gradient(135deg, rgba(26, 75, 76, 0.05), rgba(44, 122, 123, 0.05));
+    }
+    .projects-hero h1 {
+      font-size: 2.8rem;
+      background: linear-gradient(135deg, #0b1a2f, #1a4b4c);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .projects-hero p {
+      max-width: 600px;
+      margin: 0.5rem auto 0;
+      color: #4a5a6a;
+    }
+    .projects-filter {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      justify-content: center;
+      margin: 1.5rem 0 2rem;
+    }
+    .filter-btn {
+      padding: 0.4rem 1.2rem;
+      border-radius: 30px;
+      border: 1px solid #dce3e9;
+      background: rgba(255,255,255,0.8);
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background: #1a4b4c;
+      color: white;
+      border-color: #1a4b4c;
+    }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+      padding: 1rem 0 3rem;
+    }
+    .project-card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.04);
+      border: 1px solid rgba(255,255,255,0.5);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    .project-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+      border-color: rgba(44, 122, 123, 0.2);
+    }
+    .project-image-wrapper {
+      position: relative;
+      overflow: hidden;
+      padding-top: 60%;
+      background: linear-gradient(135deg, #dce3e9, #e8edf3);
+    }
+    .project-image-wrapper img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .project-card:hover .project-image-wrapper img {
+      transform: scale(1.06);
+    }
+    .project-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: rgba(26, 75, 76, 0.9);
+      backdrop-filter: blur(10px);
+      color: white;
+      padding: 0.25rem 0.8rem;
+      border-radius: 30px;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .project-card-body {
+      padding: 1.2rem 1.5rem 1.5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .project-card-body h4 {
+      font-size: 1.1rem;
+      margin-bottom: 0.4rem;
+      color: #0b1a2f;
+      transition: color 0.3s;
+      line-height: 1.3;
+    }
+    .project-card:hover .project-card-body h4 {
+      color: #1a4b4c;
+    }
+    .project-description {
+      font-size: 0.9rem;
+      color: #4a5a6a;
+      line-height: 1.6;
+      margin-bottom: 0.8rem;
+      flex: 1;
+    }
+    .project-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: auto;
+      padding-top: 0.8rem;
+      border-top: 1px solid rgba(0,0,0,0.05);
+    }
+    .project-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.8rem;
+      color: #4a5a6a;
+      background: rgba(44, 122, 123, 0.06);
+      padding: 0.2rem 0.7rem;
+      border-radius: 30px;
+    }
+    .project-meta-item i {
+      font-size: 0.75rem;
+      color: #2c7a7b;
+    }
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.6rem;
+    }
+    .project-tag {
+      font-size: 0.7rem;
+      background: rgba(44, 122, 123, 0.08);
+      padding: 0.15rem 0.6rem;
+      border-radius: 30px;
+      color: #1a4b4c;
+      transition: all 0.3s;
+    }
+    .project-card:hover .project-tag {
+      background: rgba(44, 122, 123, 0.15);
+    }
+    .project-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      margin: 1rem 0 2rem;
+      text-align: center;
+    }
+    .stat-item {
+      background: rgba(255,255,255,0.8);
+      padding: 1rem;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.5);
+    }
+    .stat-item .number {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #1a4b4c;
+    }
+    .stat-item .label {
+      font-size: 0.85rem;
+      color: #4a5a6a;
+    }
+
+    /* Page toggle button in nav */
+    .page-toggle-btn {
+      background: linear-gradient(135deg, #1a4b4c, #2c7a7b);
+      color: white !important;
+      padding: 0.3rem 1rem !important;
+      border-radius: 30px !important;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 0.85rem;
+      transition: all 0.3s;
+    }
+    .page-toggle-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(44, 122, 123, 0.3);
+    }
+    .page-toggle-btn i {
+      margin-right: 0.3rem;
+    }
+
+    @media (max-width: 768px) {
+      .projects-hero h1 { font-size: 2rem; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .project-stats { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 480px) {
+      .project-stats { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <header class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
+    <div class="container nav-container">
+      <div class="nav-logo">
+        <a href="#" id="homeLink" aria-label="Home">SH</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
+        <i class="fas fa-bars"></i>
+      </button>
+      <ul class="nav-menu" id="navMenu" role="menubar">
+        <!-- Main page nav links -->
+        <li role="none" class="main-nav-links"><a href="#home" role="menuitem" data-i18n="nav.home">Home</a></li>
+        <li role="none" class="main-nav-links"><a href="#about" role="menuitem" data-i18n="nav.about">About</a></li>
+        <li role="none" class="main-nav-links"><a href="#education" role="menuitem" data-i18n="nav.education">Education</a></li>
+        <li role="none" class="main-nav-links"><a href="#experience" role="menuitem" data-i18n="nav.experience">Experience</a></li>
+        <li role="none" class="main-nav-links"><a href="#skills" role="menuitem" data-i18n="nav.skills">Skills</a></li>
+        <li role="none" class="main-nav-links"><a href="#services" role="menuitem" data-i18n="nav.services">Services</a></li>
+        <li role="none" class="main-nav-links"><a href="#estimating" role="menuitem" data-i18n="nav.estimating">Estimating</a></li>
+        <li role="none" class="main-nav-links"><a href="#contact" role="menuitem" data-i18n="nav.contact">Contact</a></li>
+        
+        <!-- Page toggle button -->
+        <li role="none"><button class="page-toggle-btn" id="pageToggleBtn"><i class="fas fa-project-diagram"></i> <span id="pageToggleText">Projects</span></button></li>
+        
+        <li class="lang-switch" role="none">
+          <button class="lang-btn active" data-lang="en" aria-label="English">EN</button>
+          <button class="lang-btn" data-lang="bn" aria-label="বাংলা">বাংলা</button>
+          <button class="lang-btn" data-lang="lt" aria-label="Lietuvių">LT</button>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- ============================================ -->
+  <!-- MAIN PAGE -->
+  <!-- ============================================ -->
+  <div id="mainPage">
+    <main>
+      <!-- HERO -->
+      <section id="home" class="hero section">
+        <div class="container hero-grid">
+          <div class="hero-content">
+            <h1 data-i18n="hero.title">Hi, I'm Shakhawat Hossain</h1>
+            <p class="hero-sub" data-i18n="hero.sub">Civil Site Engineer</p>
+            <p class="hero-desc" data-i18n="hero.desc">I am a Civil Site Engineer from Bangladesh with practical experience in construction, water supply infrastructure, quality assurance, BOQ, engineering documentation and site management.</p>
+            <div class="hero-buttons">
+              <a href="#experience" class="btn primary" data-i18n="hero.btnExp">View My Experience</a>
+              <a href="assets/documents/cv.pdf" class="btn secondary" download data-i18n="hero.btnCv">Download CV</a>
+              <a href="#contact" class="btn secondary" data-i18n="hero.btnContact">Contact Me</a>
+              <button class="btn primary" style="background:linear-gradient(135deg,#2c7a7b,#4a9e9f);" id="heroProjectsBtn"><i class="fas fa-project-diagram"></i> View Projects</button>
+            </div>
+          </div>
+          <div class="hero-visual">
+            <div class="engineering-icon">
+              <i class="fas fa-hard-hat" aria-hidden="true"></i>
+              <i class="fas fa-ruler-combined" aria-hidden="true"></i>
+              <i class="fas fa-drafting-compass" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ABOUT -->
+      <section id="about" class="section">
+        <div class="container">
+          <h2 data-i18n="about.title">About Me</h2>
+          <div class="about-grid">
+            <div class="about-text">
+              <p data-i18n="about.p1">I am a dedicated Civil Site Engineer with a Diploma in Civil Engineering and hands-on experience in construction supervision, water supply infrastructure, quality assurance, BOQ preparation, and engineering documentation. Proficient in AutoCAD, MS Office, and site management, I bring a practical, detail-oriented approach to every project.</p>
+              <p data-i18n="about.p2">My work focuses on delivering quality results while ensuring compliance with technical specifications and safety standards. I am passionate about contributing to sustainable infrastructure development in Bangladesh and beyond.</p>
+            </div>
+            <div class="about-card info-card">
+              <h3 data-i18n="about.personal">Personal Information</h3>
+              <ul>
+                <li><strong data-i18n="about.fullName">Full Name:</strong> <span data-i18n="about.fullNameVal">Shakhawat Hossain</span></li>
+                <li><strong data-i18n="about.nationality">Nationality:</strong> <span data-i18n="about.nationalityVal">Bangladeshi</span></li>
+                <li><strong data-i18n="about.dob">Date of Birth:</strong> <span data-i18n="about.dobVal">04 January 2000</span></li>
+                <li><strong data-i18n="about.pob">Place of Birth:</strong> <span data-i18n="about.pobVal">Feni, Bangladesh</span></li>
+                <li><strong data-i18n="about.profession">Profession:</strong> <span data-i18n="about.professionVal">Civil Site Engineer</span></li>
+                <li><strong data-i18n="about.field">Field:</strong> <span data-i18n="about.fieldVal">Civil Engineering</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- EDUCATION -->
+      <section id="education" class="section bg-light">
+        <div class="container">
+          <h2 data-i18n="education.title">Education</h2>
+          <div class="edu-timeline">
+            <div class="edu-item">
+              <h3 data-i18n="education.ssc">SSC</h3>
+              <p><strong data-i18n="education.sscQual">Secondary School Certificate (SSC)</strong></p>
+              <p data-i18n="education.sscInst">Feni Government Technical School and College</p>
+            </div>
+            <div class="edu-item">
+              <h3 data-i18n="education.diploma">Diploma</h3>
+              <p><strong data-i18n="education.diplomaQual">Diploma in Civil Engineering</strong></p>
+              <p data-i18n="education.diplomaInst">Institute of Computer Science & Technology</p>
+              <p data-i18n="education.diplomaComp">Completion: December 2023</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- EXPERIENCE -->
+      <section id="experience" class="section">
+        <div class="container">
+          <h2 data-i18n="experience.title">Experience</h2>
+          <div class="exp-timeline">
+            <div class="exp-item">
+              <h3 data-i18n="experience.jobTitle">Civil Site Engineer</h3>
+              <p><span data-i18n="experience.since">Since:</span> April 2024</p>
+              <p><span data-i18n="experience.industry">Industry:</span> Civil Construction / Water Supply Infrastructure</p>
+              <ul>
+                <li data-i18n="experience.resp1">Construction site supervision</li>
+                <li data-i18n="experience.resp2">Quality assurance</li>
+                <li data-i18n="experience.resp3">Quantity measurement</li>
+                <li data-i18n="experience.resp4">BOQ preparation and checking</li>
+                <li data-i18n="experience.resp5">Engineering documentation</li>
+                <li data-i18n="experience.resp6">Construction monitoring</li>
+                <li data-i18n="experience.resp7">Consultant coordination</li>
+                <li data-i18n="experience.resp8">Water supply infrastructure</li>
+                <li data-i18n="experience.resp9">Overhead Water Tank construction</li>
+                <li data-i18n="experience.resp10">Pipeline connection works</li>
+                <li data-i18n="experience.resp11">Site inspection</li>
+                <li data-i18n="experience.resp12">Quality control</li>
+                <li data-i18n="experience.resp13">Progress monitoring</li>
+                <li data-i18n="experience.resp14">Maintenance coordination</li>
+              </ul>
+              <p class="exp-project" data-i18n="experience.project">World Bank-funded / AIIB-funded rural water, sanitation and hygiene development project</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SKILLS -->
+      <section id="skills" class="section bg-light">
+        <div class="container">
+          <h2 data-i18n="skills.title">Skills</h2>
+          <div class="skills-grid">
+            <div class="skill-group">
+              <h3 data-i18n="skills.civil">Civil Engineering</h3>
+              <ul>
+                <li data-i18n="skills.c1">Construction Site Supervision</li>
+                <li data-i18n="skills.c2">Quality Assurance</li>
+                <li data-i18n="skills.c3">Quantity Measurement</li>
+                <li data-i18n="skills.c4">BOQ</li>
+                <li data-i18n="skills.c5">Construction Monitoring</li>
+                <li data-i18n="skills.c6">Water Supply Infrastructure</li>
+                <li data-i18n="skills.c7">Pipeline Works</li>
+                <li data-i18n="skills.c8">Overhead Water Tank Works</li>
+              </ul>
+            </div>
+            <div class="skill-group">
+              <h3 data-i18n="skills.tech">Technical</h3>
+              <ul>
+                <li data-i18n="skills.t1">AutoCAD</li>
+                <li data-i18n="skills.t2">MS Office</li>
+                <li data-i18n="skills.t3">Web Design</li>
+                <li data-i18n="skills.t4">Programming</li>
+                <li data-i18n="skills.t5">e-GP</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SERVICES -->
+      <section id="services" class="section">
+        <div class="container">
+          <h2 data-i18n="services.title">My Services</h2>
+          <div class="services-grid">
+            <div class="service-card"><i class="fas fa-hard-hat"></i><h3 data-i18n="services.s1">Civil Site Supervision</h3><p data-i18n="services.s1d">Construction site monitoring, work coordination and progress supervision.</p></div>
+            <div class="service-card"><i class="fas fa-calculator"></i><h3 data-i18n="services.s2">Quantity & BOQ Support</h3><p data-i18n="services.s2d">Quantity measurement, BOQ preparation, checking and construction documentation.</p></div>
+            <div class="service-card"><i class="fas fa-check-circle"></i><h3 data-i18n="services.s3">Construction Quality Assurance</h3><p data-i18n="services.s3d">Construction quality monitoring and technical requirement checking.</p></div>
+            <div class="service-card"><i class="fas fa-pencil-ruler"></i><h3 data-i18n="services.s4">AutoCAD Drafting</h3><p data-i18n="services.s4d">Basic civil engineering drawings and technical drafting support.</p></div>
+            <div class="service-card"><i class="fas fa-file-alt"></i><h3 data-i18n="services.s5">Engineering Documentation</h3><p data-i18n="services.s5d">Construction reports, measurements and technical documentation.</p></div>
+            <div class="service-card"><i class="fas fa-water"></i><h3 data-i18n="services.s6">Water Supply Infrastructure</h3><p data-i18n="services.s6d">Support related to water supply pipelines, overhead water tanks and civil construction.</p></div>
+            <div class="service-card"><i class="fas fa-laptop-code"></i><h3 data-i18n="services.s7">Web Design</h3><p data-i18n="services.s7d">Basic responsive website design.</p></div>
+            <div class="service-card"><i class="fas fa-desktop"></i><h3 data-i18n="services.s8">Technical Computer Support</h3><p data-i18n="services.s8d">MS Office, documentation, data handling and basic programming support.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ESTIMATING -->
+      <section id="estimating" class="section bg-light">
+        <div class="container">
+          <h2 data-i18n="estimating.title">Construction Estimating</h2>
+          
+          <div class="rates-display" style="background:rgba(255,255,255,0.8);padding:1rem;border-radius:12px;margin-bottom:1.5rem;">
+            <h4>Current Material Rates <span style="font-weight:normal;font-size:0.9rem;" id="ratesLastUpdated"></span></h4>
+            <div id="ratesDisplay" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:0.5rem;margin-top:0.5rem;"></div>
+            <button id="refreshRates" class="btn small" style="margin-top:0.5rem;"><i class="fas fa-sync"></i> Refresh Rates</button>
+          </div>
+
+          <div class="estimating-grid">
+            <div class="est-card">
+              <h3><i class="fas fa-arrows-alt-h"></i> <span data-i18n="estimating.area">Area</span></h3>
+              <div class="est-inputs">
+                <input type="number" id="areaLen" placeholder="Length (m)" step="any">
+                <input type="number" id="areaWid" placeholder="Width (m)" step="any">
+                <select id="areaUnit"><option value="sft">sft</option><option value="m2">m²</option></select>
+                <button id="calcArea" class="btn small"><span data-i18n="estimating.calc">Calculate</span></button>
+              </div>
+              <p id="areaResult">Area: 0</p>
+            </div>
+            <div class="est-card">
+              <h3><i class="fas fa-cube"></i> <span data-i18n="estimating.volume">Volume</span></h3>
+              <div class="est-inputs">
+                <input type="number" id="volLen" placeholder="Length (m)" step="any">
+                <input type="number" id="volWid" placeholder="Width (m)" step="any">
+                <input type="number" id="volHei" placeholder="Height (m)" step="any">
+                <select id="volUnit"><option value="cft">cft</option><option value="m3">m³</option></select>
+                <button id="calcVol" class="btn small"><span data-i18n="estimating.calc">Calculate</span></button>
+              </div>
+              <p id="volResult">Volume: 0</p>
+            </div>
+            <div class="est-card">
+              <h3><i class="fas fa-weight"></i> <span data-i18n="estimating.steel">Steel Weight</span></h3>
+              <div class="est-inputs">
+                <input type="number" id="steelDia" placeholder="Dia (mm)" step="any">
+                <input type="number" id="steelLen" placeholder="Length (m)" step="any">
+                <input type="number" id="steelBars" placeholder="No. of bars" step="1">
+                <button id="calcSteel" class="btn small"><span data-i18n="estimating.calc">Calculate</span></button>
+              </div>
+              <p id="steelResult">Weight: 0 kg</p>
+              <small data-i18n="estimating.steelNote">Theoretical estimation. Follow approved structural drawings.</small>
+            </div>
+          </div>
+
+          <div class="boq-section">
+            <h3><i class="fas fa-table"></i> <span data-i18n="estimating.boq">BOQ Calculator</span></h3>
+            <div class="boq-controls">
+              <button id="addBoqRow" class="btn small"><i class="fas fa-plus"></i> <span data-i18n="estimating.addRow">Add Row</span></button>
+              <button id="calculateEstimate" class="btn primary small"><i class="fas fa-calculator"></i> Calculate Estimate</button>
+              <button id="printEstimate" class="btn small"><i class="fas fa-print"></i> <span data-i18n="estimating.print">Print Estimate</span></button>
+            </div>
+            <div class="table-wrap">
+              <table id="boqTable">
+                <thead><tr><th data-i18n="estimating.item">Item</th><th data-i18n="estimating.desc">Description</th><th data-i18n="estimating.unit">Unit</th><th data-i18n="estimating.qty">Quantity</th><th data-i18n="estimating.rate">Unit Rate (৳)</th><th data-i18n="estimating.amount">Amount (৳)</th><th></th></tr></thead>
+                <tbody id="boqBody"></tbody>
+              </table>
+            </div>
+            <div class="boq-summary">
+              <p><span data-i18n="estimating.subtotal">Subtotal:</span> ৳ <span id="boqSubtotal">0</span></p>
+              <p><span data-i18n="estimating.total">Estimated Total:</span> ৳ <span id="boqTotal">0</span></p>
+              <p style="font-size:0.85rem;color:#4a5a6a;">Last updated: <span id="estimateLastUpdated">-</span></p>
+            </div>
+            <div class="disclaimer" data-i18n="estimating.disclaimer">This calculator provides a preliminary estimate based on user-provided quantities and manually configured rates. Actual costs may vary.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact" class="section">
+        <div class="container">
+          <h2 data-i18n="contact.title">Contact Me</h2>
+          <form id="contactForm" class="contact-form" action="/contact" method="POST">
+            <div class="form-group"><input type="text" id="cName" name="name" placeholder="Name" data-i18n-placeholder="contact.name" required></div>
+            <div class="form-group"><input type="email" id="cEmail" name="email" placeholder="Email" data-i18n-placeholder="contact.email" required></div>
+            <div class="form-group"><input type="tel" id="cPhone" name="phone" placeholder="Phone" data-i18n-placeholder="contact.phone"></div>
+            <div class="form-group">
+              <select id="cInquiry" name="inquiry">
+                <option value="" data-i18n="contact.inquiryType">Inquiry Type</option>
+                <option value="Civil Engineering" data-i18n="contact.inq1">Civil Engineering</option>
+                <option value="Construction Estimation" data-i18n="contact.inq2">Construction Estimation</option>
+                <option value="BOQ / Quantity" data-i18n="contact.inq3">BOQ / Quantity</option>
+                <option value="AutoCAD" data-i18n="contact.inq4">AutoCAD</option>
+                <option value="Water Supply Infrastructure" data-i18n="contact.inq5">Water Supply Infrastructure</option>
+                <option value="Web Design" data-i18n="contact.inq6">Web Design</option>
+                <option value="General Inquiry" data-i18n="contact.inq7">General Inquiry</option>
+                <option value="Other" data-i18n="contact.inq8">Other</option>
+              </select>
+            </div>
+            <div class="form-group"><input type="text" id="cSubject" name="subject" placeholder="Subject" data-i18n-placeholder="contact.subject" required></div>
+            <div class="form-group"><textarea id="cMessage" name="message" placeholder="Message" data-i18n-placeholder="contact.message" rows="4" required></textarea></div>
+            <button type="submit" class="btn primary" data-i18n="contact.send">Send Inquiry</button>
+            <div id="formFeedback"></div>
+          </form>
+        </div>
+      </section>
+    </main>
+  </div>
+  <!-- ===== END MAIN PAGE ===== -->
+
+  <!-- ============================================ -->
+  <!-- PROJECTS PAGE -->
+  <!-- ============================================ -->
+  <div id="projectsPage">
+    <main>
+      <!-- Projects Hero -->
+      <section class="projects-hero">
+        <div class="container">
+          <button class="btn secondary" id="backToHomeBtn" style="margin-bottom:1rem;"><i class="fas fa-arrow-left"></i> Back to Home</button>
+          <h1>My Projects</h1>
+          <p>Explore the civil engineering projects I've worked on, from water supply infrastructure to construction supervision.</p>
+        </div>
+      </section>
+
+      <!-- Project Stats -->
+      <section class="container">
+        <div class="project-stats">
+          <div class="stat-item">
+            <div class="number">4+</div>
+            <div class="label">Projects Completed</div>
+          </div>
+          <div class="stat-item">
+            <div class="number">2+</div>
+            <div class="label">Years Experience</div>
+          </div>
+          <div class="stat-item">
+            <div class="number">100%</div>
+            <div class="label">Quality Assurance</div>
+          </div>
+          <div class="stat-item">
+            <div class="number">৳ 50M+</div>
+            <div class="label">Project Value</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Projects Grid -->
+      <section class="container">
+        <div class="projects-filter">
+          <button class="filter-btn active" data-filter="all">All Projects</button>
+          <button class="filter-btn" data-filter="infrastructure">Infrastructure</button>
+          <button class="filter-btn" data-filter="construction">Construction</button>
+          <button class="filter-btn" data-filter="water">Water Supply</button>
+          <button class="filter-btn" data-filter="supervision">Supervision</button>
+        </div>
+
+        <div class="projects-grid" id="projectsGrid">
+          <!-- Projects rendered by JavaScript -->
+        </div>
+      </section>
+    </main>
+  </div>
+  <!-- ===== END PROJECTS PAGE ===== -->
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div><h3>Shakhawat Hossain</h3><p data-i18n="footer.tagline">Civil Site Engineer</p></div>
+      <div class="footer-links">
+        <a href="#home" data-i18n="nav.home">Home</a>
+        <a href="#about" data-i18n="nav.about">About</a>
+        <a href="#education" data-i18n="nav.education">Education</a>
+        <a href="#experience" data-i18n="nav.experience">Experience</a>
+        <a href="#skills" data-i18n="nav.skills">Skills</a>
+        <a href="#services" data-i18n="nav.services">Services</a>
+        <a href="#" id="footerProjectsLink" data-i18n="nav.projects">Projects</a>
+        <a href="#estimating" data-i18n="nav.estimating">Estimating</a>
+        <a href="#contact" data-i18n="nav.contact">Contact</a>
+        <a href="#privacy" data-i18n="footer.privacy">Privacy</a>
+        <a href="#cookies" data-i18n="footer.cookies">Cookies</a>
+      </div>
+      <div class="social">
+        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
